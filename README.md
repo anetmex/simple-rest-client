@@ -40,7 +40,7 @@ cd simple-rest-client
 
 mvn clean install
 
-cd client/simple-rest-client
+cd client/target
 
 java -jar client-1.0-app.jar
 ```
