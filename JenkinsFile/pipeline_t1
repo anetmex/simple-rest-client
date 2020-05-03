@@ -21,5 +21,14 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+        stage ("Ansible") {
+            steps {
+                ansiblePlaybook('/opt/ansible/playbooks/SimpleRestApp.yml') {
+                inventoryPath('/etc/ansible/hosts')
+//                become(true)
+//                becomeUser("user")
+                }
+            }
+        }
     }
 }
