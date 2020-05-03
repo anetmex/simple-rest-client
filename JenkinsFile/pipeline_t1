@@ -24,9 +24,13 @@ pipeline {
         stage ("Ansible") {
             steps {
                 ansiblePlaybook(
+                    credentialsId: 'deploy',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
                     inventory: '/etc/ansible/hosts',
                     playbook: '/opt/ansible/playbooks/SimpleRestApp.yml',
-                    sudoUser: 'deploy')
+                    sudo: true
+                    )
 
 //                become(true)
 //                becomeUser("user")
