@@ -25,7 +25,7 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     inventory: '/etc/ansible/hosts',
-                    playbook: '/opt/ansible/playbooks/SimpleRestApp.yml'
+                    playbook: '/opt/ansible/playbooks/SimpleRestApp.yml',
                     sudoUser: 'deploy')
 
 //                become(true)
