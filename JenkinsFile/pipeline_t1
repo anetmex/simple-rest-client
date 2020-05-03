@@ -29,7 +29,7 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '/etc/ansible/hosts',
                     playbook: '/opt/ansible/playbooks/SimpleRestApp.yml',
-                    sudo: true
+//                    sudo: true
                     )
 
 //                become(true)
