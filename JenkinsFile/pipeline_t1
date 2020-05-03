@@ -23,11 +23,12 @@ pipeline {
         }
         stage ("Ansible") {
             steps {
-                ansiblePlaybook('/opt/ansible/playbooks/SimpleRestApp.yml') {
-                inventoryPath('/etc/ansible/hosts')
+                ansiblePlaybook(
+                    inventory: '/etc/ansible/hosts',
+                    playbook: '/opt/ansible/playbooks/SimpleRestApp.yml')
+
 //                become(true)
 //                becomeUser("user")
-                }
             }
         }
     }
