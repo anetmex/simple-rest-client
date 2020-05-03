@@ -26,7 +26,8 @@ pipeline {
                 ansiblePlaybook(
                     inventory: '/etc/ansible/hosts',
                     playbook: '/opt/ansible/playbooks/SimpleRestApp.yml',
-                    become: 'deploy')
+                    become: 'true',
+                    becomeuser: 'deploy')
 
 //                become(true)
 //                becomeUser("user")
