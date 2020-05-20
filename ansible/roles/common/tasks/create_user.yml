@@ -1,0 +1,5 @@
+---
+- name: create user deploy for
+  become_user: ubuntu
+    user:
+      name: deploy
