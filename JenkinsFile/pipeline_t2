@@ -11,16 +11,7 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("CHECKOUT") {
-            steps {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
-            }
-        }
-        stage("BUILD") {
-            steps {
-                sh 'mvn clean install'
-            }
-        }
+
         stage ("Ansible") {
             steps {
                 ansiblePlaybook(
