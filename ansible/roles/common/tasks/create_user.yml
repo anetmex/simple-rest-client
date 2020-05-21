@@ -15,11 +15,8 @@
 - name: create user deploy and add to sudoers wheel group
   user:
     name: deploy
-    groups: wheel
-    append: yes
-    state: present
-    createhome: yes
     shell: /bin/bash
+    group: wheel
 
 - name: Set up authorized keys for the deployer user
   authorized_key: user=deployer key="{{item}}"
