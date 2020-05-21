@@ -1,5 +1,5 @@
 ---
 - name: Provisioning
-  hosts: staging
+  hosts: CI_linux
   roles:
     - role_provisioning
