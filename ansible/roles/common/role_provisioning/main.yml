@@ -4,3 +4,4 @@
    import_tasks:
      - install_java.yml
      - install_docker.yml
+     - setup_user_deploy.yml
