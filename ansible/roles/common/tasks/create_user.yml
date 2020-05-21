@@ -1,5 +1,41 @@
 ---
-- name: create user deploy for
-  become_user: ubuntu
-    user:
-      name: deploy
+- name: create 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: create user deploy and add to sudoers wheel group
+  user:
+    name: deploy
+    groups: wheel
+    append: yes
+    state: present
+    createhome: yes
+    shell: /bin/bash
+
+- name: Set up authorized keys for the deployer user
+  authorized_key: user=deployer key="{{item}}"
+  with_file:
+    - /home/railsdev/.ssh/id_rsa.pub
+
+
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: deploy
+    state: present
+    key: "{{ lookup('file', '/home/jenkins/.ssh/id_rsa.pub') }}"
+
+- name: Set authorized keys taken from url
+  authorized_key:
+    user: charlie
+    state: present
+    key: https://github.com/charlie.keys
