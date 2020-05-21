@@ -1,0 +1,3 @@
+---
+- name: start app
+  shell: nohup java -jar /home/deploy/client-1.0-app.jar &

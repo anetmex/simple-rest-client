@@ -2,12 +2,7 @@
 - name: Install simple-rest-app
   hosts: CI_env
   become_user: deploy
+  import_tasks:
+    - get_artifact_fr_jenkins.yml
+    - start_app.yml
 
-  tasks:
-  - name: copy artifact
-    copy:
-      src: /var/lib/jenkins/.m2/repository/com/simple/restclient/client/1.0/client-1.0-app.jar
-      dest: /home/deploy/
-
-  - name: start app
-    shell: nohup java -jar /home/deploy/client-1.0-app.jar &
