@@ -1,0 +1,5 @@
+---
+- name: copy artifact
+  copy:
+    src: /var/lib/jenkins/.m2/repository/com/simple/restclient/client/1.0/client-1.0-app.jar
+    dest: /home/deploy/
