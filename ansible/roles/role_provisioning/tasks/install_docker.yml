@@ -32,7 +32,7 @@
 
   - name: Install Docker
     package:
-      name: {{ item }}
+      name: "{{ item }}"
       state: latest
       loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io']
     become: yes
