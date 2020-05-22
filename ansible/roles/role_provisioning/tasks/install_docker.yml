@@ -10,7 +10,7 @@
 
   - name: Add Docker repo
     get_url:
-      url: https://download.docker.com/linux/centos/docker-ce.repo
+      url: https://download.docker.com/linux/rhel/docker-ce.repo
       dest: /etc/yum.repos.d/docer-ce.repo
     become: yes
 
@@ -32,8 +32,9 @@
 
   - name: Install Docker
     package:
-      name: docker-ce
+      name: {{ item }}
       state: latest
+      loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io']
     become: yes
 
   - name: Start Docker service
