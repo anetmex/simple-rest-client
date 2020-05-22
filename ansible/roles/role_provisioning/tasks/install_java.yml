@@ -1,6 +1,39 @@
----
- - name: install java 8
-   yum:
-     name: openjdk-8-jdk
-     state: present
-     update_cache: yes
+# Yum is the default Package manager on older RHEL and CentOS
+- block:
+
+  # Default (OpenJDK)
+  - name: Update the Yum repo
+    yum:
+      name: "*"
+      state: latest
+    become: true
+    when: 'system_update == True'
+
+  - name: Install default-jre
+    yum:
+      name: java
+      state: present
+    become: true
+    when: '(install_type == "jre") and (java_version == "default")'
+
+  # Doesn't seem to be any default JDK nomenclature so we do it directly
+  - name: Install default-jdk
+    yum:
+      name: java-1.8.0-openjdk-devel
+      state: present
+    become: true
+    when: '(install_type == "jdk") and (java_version == "default")'
+
+
+  # Open JDK
+  - block:
+
+    - name: Install Open JDK
+      yum:
+        name: java-1.{{ java_version.split('-')[1] }}.0-openjdk{{rh_install_type}}
+      become: true
+
+    when: '(java_version != "default") and ("open" in java_version)'
+
+  when: 'pm == "yum"'
+
