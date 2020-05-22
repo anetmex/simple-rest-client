@@ -1,5 +1,5 @@
 # Yum is the default Package manager on older RHEL and CentOS
-- block:
+- name: Install default java
 
   # Default (OpenJDK)
   - name: Update the Yum repo
@@ -35,5 +35,4 @@
 
     when: '(java_version != "default") and ("open" in java_version)'
 
-  when: 'pm == "yum"'
 
