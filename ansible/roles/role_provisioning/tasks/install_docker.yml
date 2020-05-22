@@ -34,7 +34,7 @@
     package:
       name: "{{ item }}"
       state: latest
-      loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io']
+      loop: "{{ 'docker-ce', 'docker-ce-cli', 'containerd.io' }}"
     become: yes
 
   - name: Start Docker service
