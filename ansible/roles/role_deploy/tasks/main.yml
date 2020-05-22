@@ -1,6 +1,5 @@
-- name: Install simple-rest-app
-  - import_tasks: roles/common/tasks/get_artifact_fr_jenkins.yml
-  - import_tasks: roles/common/tasks/start_app.yml
+- import_tasks: roles/common/tasks/get_artifact_fr_jenkins.yml
+- import_tasks: roles/common/tasks/start_app.yml
 
 
 
