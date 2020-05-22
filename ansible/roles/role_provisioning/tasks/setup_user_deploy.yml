@@ -1,0 +1,26 @@
+---
+- name: create 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: create user deploy and add to sudoers wheel group
+  user:
+    name: deploy
+    shell: /bin/bash
+    group: wheel
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: deploy
+    state: present
+    key: "{{ lookup('file', '/home/jenkins/.ssh/id_rsa.pub') }}"
+
