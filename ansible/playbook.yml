@@ -4,3 +4,4 @@
   become: yes
   roles:
     - role_provisioning
+    - role_deploy
