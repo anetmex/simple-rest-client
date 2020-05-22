@@ -1,10 +1,4 @@
 ---
-  - name: Install aptitude using apt
-      yum:
-        name: aptitude
-        state: latest
-        update_cache: yes
-
   - name: Install required system packages
       yum:
         name: {{ item }}
