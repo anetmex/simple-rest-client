@@ -3,6 +3,6 @@
   hosts: CI_env
   become_user: deploy
   tasks:
-    - import_tasks: roles/common/get_artifact_fr_jenkins.yml
-    - import_tasks: roles/common/start_app.yml
+    - import: roles/common/get_artifact_fr_jenkins.yml
+    - import: roles/common/start_app.yml
 
