@@ -2,7 +2,7 @@
 - name: Install simple-rest-app
   hosts: CI_env
   become_user: deploy
-  import_tasks:
-    - get_artifact_fr_jenkins.yml
-    - start_app.yml
+  tasks:
+    - import_tasks: roles/common/get_artifact_fr_jenkins.yml
+    - import_tasks: roles/common/start_app.yml
 
