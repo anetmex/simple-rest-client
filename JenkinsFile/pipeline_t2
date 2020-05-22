@@ -22,8 +22,8 @@ pipeline {
                     credentialsId: 'ec2-user',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/simpe-rest-client/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/simpe-rest-client/ansible/playbook.yml',
+                    inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/playbook.yml',
 //                    sudo: true
                     )
 
