@@ -32,9 +32,8 @@
 
   - name: Install Docker
     package:
-      name: "{{ item }}"
+      name: "{{ 'docker-ce', 'docker-ce-cli', 'containerd.io' }}"
       state: latest
-      loop: "{{ 'docker-ce', 'docker-ce-cli', 'containerd.io' }}"
     become: yes
 
   - name: Start Docker service
