@@ -22,5 +22,5 @@
   authorized_key:
     user: deploy
     state: present
-    key: "{{ lookup('file', '/home/jenkins/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '/var/lib/jenkins/.ssh/id_rsa') }}"
 
