@@ -1,7 +1,5 @@
 ---
  - name: Create provisioning role, which install java, docker, create system user, create folders and other required staff on CI and QA environment's
    become: yes
-   import_tasks:
-     - install_java.yml
-     - install_docker.yml
-     - setup_user_deploy.yml
+   tasks:
+     install_java.yml
