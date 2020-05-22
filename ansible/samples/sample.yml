@@ -9,3 +9,7 @@
   authorized_key: user=deployer key="{{item}}"
   with_file:
     - /home/railsdev/.ssh/id_rsa.pub
+
+  include_role:
+    name: common
+    tasks_from: get_artifact_fr_jenkins.yml
