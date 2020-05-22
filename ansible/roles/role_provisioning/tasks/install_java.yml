@@ -22,7 +22,7 @@
       name: java-1.8.0-openjdk
       state: present
     become: true
-    when: '(install_type == "jdk") and (java_version == "default")'
+ #   when: '(install_type == "jdk") and (java_version == "default")'
 
 
   # Open JDK
