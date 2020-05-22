@@ -8,30 +8,31 @@
     become: true
     when: 'system_update == True'
 
-  - name: Install default-jre
-    yum:
-      name: java
-      state: present
-    become: true
-    when: '(install_type == "jre") and (java_version == "default")'
+  #- name: Install default-jre
+  #  yum:
+  #    name: java
+  #    state: present
+  #  become: true
+  #  when: '(install_type == "jre") and (java_version == "default")'
 
   # Doesn't seem to be any default JDK nomenclature so we do it directly
   - name: Install default-jdk
     yum:
-      name: java-1.8.0-openjdk-devel
+#      name: java-1.8.0-openjdk-devel
+      name: java-1.8.0-openjdk
       state: present
     become: true
     when: '(install_type == "jdk") and (java_version == "default")'
 
 
   # Open JDK
-  - block:
+  #- block:
 
-    - name: Install Open JDK
-      yum:
-        name: java-1.{{ java_version.split('-')[1] }}.0-openjdk{{rh_install_type}}
-      become: true
+   # - name: Install Open JDK
+   #   yum:
+   #     name: java-1.{{ java_version.split('-')[1] }}.0-openjdk{{rh_install_type}}
+   #   become: true
 
-    when: '(java_version != "default") and ("open" in java_version)'
+    #when: '(java_version != "default") and ("open" in java_version)'
 
 
