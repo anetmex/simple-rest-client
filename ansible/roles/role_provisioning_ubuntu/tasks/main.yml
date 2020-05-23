@@ -1,0 +1,3 @@
+- import_tasks: roles/common/tasks/install_java.yml
+- import_tasks: roles/common/tasks/setup_user_deploy.yml
+- import_tasks: roles/common/tasks/install_docker.yml
