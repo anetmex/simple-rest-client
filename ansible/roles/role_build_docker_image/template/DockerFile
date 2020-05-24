@@ -1,0 +1,4 @@
+FROM openjdk:11-jdk-slim
+RUN mkdir -p /home/app && cd /home/app
+EXPOSE 8083
+RUN  nohup java -jar client-1.0-app.jar &
