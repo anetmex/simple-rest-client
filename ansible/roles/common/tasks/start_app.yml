@@ -1,4 +1,4 @@
 ---
 - name: start app
-  become_user: deploy
+  #become_user: deploy
   shell: nohup java -jar /home/deploy/client-1.0-app.jar &
