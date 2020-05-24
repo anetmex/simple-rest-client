@@ -19,7 +19,7 @@ pipeline {
         stage ("Ansible") {
             steps {
                 ansiblePlaybook(
-                    credentialsId: 'ubuntu',
+                    credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
