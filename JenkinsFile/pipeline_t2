@@ -11,9 +11,14 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("CHECKOUT") {
+        stage("CHECKOUT_APP") {
             steps {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
+            }
+        }
+        stage("CHECKOUT_APP") {
+            steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
         stage ("Ansible_ubuntu") {
