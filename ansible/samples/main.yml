@@ -1,3 +1,0 @@
----
-- name: Create provisioning role, which install java, docker, create system user, create folders and other required staff on CI and QA environment's
-  become: yes
