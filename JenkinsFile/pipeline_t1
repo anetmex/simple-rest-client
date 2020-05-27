@@ -24,7 +24,7 @@ pipeline {
         stage ("Ansible") {
             steps {
                 ansiblePlaybook(
-                    credentialsId: 'ubuntu_key',
+                    credentialsId: 'ubuntu',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/etc/ansible/hosts',
