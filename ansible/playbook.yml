@@ -3,5 +3,5 @@
   hosts: CI_linux
   become: yes
   roles:
-    #- role_provisioning_ubuntu
+    - role_provisioning_ubuntu
     - role_deploy

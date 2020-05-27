@@ -16,10 +16,25 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
             }
         }
-        stage ("Ansible") {
+        stage ("Ansible_ubuntu") {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/playbook.yml',
+//                    sudo: true
+                    )
+
+//                become(true)
+//                becomeUser("user")
+            }
+        }
+        stage ("Ansible_ec2-user") {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ec2-user',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
