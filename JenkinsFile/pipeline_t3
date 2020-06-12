@@ -35,7 +35,7 @@ pipeline {
             steps {
                 rtMavenRun (
                     tool: 'maven-server', // Tool name from Jenkins configuration
-                    pom: 'test_artifactory_2/pom.xml',
+                    pom: 'pom.xml',
                     goals: 'clean install',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
