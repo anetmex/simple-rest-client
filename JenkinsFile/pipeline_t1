@@ -21,7 +21,8 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('upload') {
+    stage ('upload') {
+        steps {
           script {
 
             def server = Artifactory.server "artifactory-server"
@@ -45,6 +46,7 @@ pipeline {
             server.publishBuildInfo buildInfo
           }
         }
+    }
         stage ("Ansible") {
             steps {
                 ansiblePlaybook(
