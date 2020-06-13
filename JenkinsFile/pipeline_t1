@@ -18,7 +18,7 @@ pipeline {
         }
         stage("BUILD") {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install -Dv=${BUILD_NUMBER}'
             }
         }
     stage ('upload') {
@@ -33,7 +33,7 @@ pipeline {
             def uploadSpec = """{
               "files": [
                 {
-                  "pattern": "**/target/client-1.0.app.${BUILD_NUMBER}.jar",
+                  "pattern": "**/target/client-1.0.app.jar",
                   "target": "libs-snapshot-local"
                 }
               ]
