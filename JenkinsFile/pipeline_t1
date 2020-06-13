@@ -33,7 +33,7 @@ pipeline {
             def uploadSpec = """{
               "files": [
                 {
-                  "pattern": "**/target/simple-rest-client.${BUILD_NUMBER}.jar",
+                  "pattern": "**/client/target/client-1.0.${BUILD_NUMBER}-app.jar",
                   "target": "libs-snapshot-local"
                 }
               ]
