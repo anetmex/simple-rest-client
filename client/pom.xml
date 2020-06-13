@@ -8,11 +8,11 @@
         <groupId>com.simple.restclient</groupId>
         <artifactId>simple-rest-client</artifactId>
         <relativePath>../pom.xml</relativePath>
-        <version>1.0</version>
+        <version>1.0.${v}</version>
     </parent>
 
     <artifactId>client</artifactId>
-    <version>1.0</version>
+    <version>1.0.${v}</version>
 
     <dependencies>
         <dependency>
