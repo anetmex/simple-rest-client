@@ -24,7 +24,7 @@ pipeline {
         stage ('upload') {
           script {
 
-            def server = Artifactory.server "artifactory@ibsrv02"
+            def server = Artifactory.server "artifactory-server"
             def buildInfo = Artifactory.newBuildInfo()
             buildInfo.env.capture = true
             buildInfo.env.collect()
@@ -33,12 +33,6 @@ pipeline {
               "files": [
                 {
                   "pattern": "**/target/*.jar",
-                  "target": "libs-snapshot-local"
-                }, {
-                  "pattern": "**/target/*.pom",
-                  "target": "libs-snapshot-local"
-                }, {
-                  "pattern": "**/target/*.war",
                   "target": "libs-snapshot-local"
                 }
               ]
