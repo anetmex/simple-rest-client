@@ -59,7 +59,7 @@ pipeline {
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/deploy_app.yml',
+                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/deploy_app.yml'
 //                    sudo: true
             }
         }
