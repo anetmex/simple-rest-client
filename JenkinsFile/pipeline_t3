@@ -1,14 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage("CHECKOUT_ANSIBLE") {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
-            }
-        }
         stage ('Clone') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
+            }
+        }
+        stage("CHECKOUT_ANSIBLE") {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']]],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
         stage ('Artifactory configuration') {
