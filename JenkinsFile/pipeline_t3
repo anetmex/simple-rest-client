@@ -52,7 +52,8 @@ pipeline {
             }
         }
 
-        stage ('Prepare latest version') {
+            steps {
+        stage ('Deploy latest version') {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
