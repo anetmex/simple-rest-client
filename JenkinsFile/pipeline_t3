@@ -52,7 +52,6 @@ pipeline {
             }
         }
 
-            steps {
         stage ('Deploy latest version') {
             steps {
                 ansiblePlaybook(
