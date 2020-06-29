@@ -68,7 +68,7 @@ pipeline {
                     credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/inventory/staging.ini',
+                    inventory: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/deploy_app.yml'
 //                    sudo: true
                 )
