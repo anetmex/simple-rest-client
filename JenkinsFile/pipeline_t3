@@ -12,7 +12,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                 doGenerateSubmoduleConfigurations: false,
-                extensions: [extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']]],
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']],
                 submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
