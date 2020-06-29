@@ -51,5 +51,17 @@ pipeline {
                 )
             }
         }
+
+        stage ('Prepare latest version') {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/deploy_app.yml',
+//                    sudo: true
+            }
+        }
     }
 }
