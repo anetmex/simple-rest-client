@@ -70,7 +70,7 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/deploy_app.yml',
-                    extraVars { "build_number='${BUILD_NUMBER}'" }
+                    extraVars: [ "build_number='${BUILD_NUMBER}'" ]
 //                    sudo: true
                 )
             }
