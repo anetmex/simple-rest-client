@@ -27,8 +27,8 @@ pipeline {
                     credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/playbook.yml',
+                    inventory: '/var/lib/jenkins/workspace/build_docker_image/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/build_docker_image/ansible/build_docker_image.yml',
 //                    sudo: true
                     )
 
@@ -42,8 +42,8 @@ pipeline {
                     credentialsId: 'ec2-user',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/simple-ci-deploy-with-roles/ansible/playbook.yml',
+                    inventory: '/var/lib/jenkins/workspace/build_docker_image/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/build_docker_image/ansible/build_docker_image.yml',
                     extraVars: [
                         build_number:'${BUILD_NUMBER}'
                         ]
