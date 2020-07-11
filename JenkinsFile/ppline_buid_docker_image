@@ -46,7 +46,8 @@ pipeline {
                     playbook: '/var/lib/jenkins/workspace/build_docker_image/ansible/build_docker_image.yml',
                     extraVars: [
                         build_number:'${BUILD_NUMBER}'
-                        ]
+                        ],
+                    extras: '-vvvv'
 //                    sudo: true
                     )
 
