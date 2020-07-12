@@ -18,8 +18,8 @@ pipeline {
                     credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/test_artifactory_2/ansible/ansible/deploy_app.yml',
+                    inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/deploy_app.yml',
                     extraVars: [
                         build_number:'${version_VERSION}'
                         ]
