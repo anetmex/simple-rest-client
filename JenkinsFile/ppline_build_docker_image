@@ -21,9 +21,16 @@ pipeline {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
+        stage("build parameters") {
+            steps {
+               script {
+                   def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
+                   }
+               }
+            }
+        }
         stage ("Ansible_ubuntu") {
             steps {
-                def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
