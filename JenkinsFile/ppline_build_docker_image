@@ -25,7 +25,7 @@ pipeline {
             steps {
                script {
                    def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
-                   echo '$buildNumber'
+                   echo '${buildNumber}'
                }
             }
         }
