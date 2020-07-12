@@ -23,10 +23,10 @@ pipeline {
         }
         stage("build parameters") {
             steps {
-               script {
+               //script {
                    //def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
-                   echo '${buildNumber}'
-               }
+                   sh "echo ${buildNumber}"
+               //}
             }
         }
         stage ("Ansible_ubuntu") {
