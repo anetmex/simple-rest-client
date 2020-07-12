@@ -29,6 +29,9 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/build_docker_image/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/build_docker_image/ansible/build_docker_image.yml',
+                    extraVars: [
+                        build_number:'${BUILD_NUMBER}'
+                        ]
 //                    sudo: true
                     )
 
@@ -47,7 +50,7 @@ pipeline {
                     extraVars: [
                         build_number:'${BUILD_NUMBER}'
                         ],
-                    extras: '-vvvv'
+//                    extras: '-vvvv'
 //                    sudo: true
                     )
 
