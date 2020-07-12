@@ -1,0 +1,62 @@
+#!groovy
+// Check ub1 properties
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("CHECKOUT_APP") {
+            steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
+            }
+        }
+        stage("CHECKOUT_ANSIBLE") {
+            steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
+            }
+        }
+        stage ("Ansible_ubuntu") {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/deploy_docker_image/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/deploy_docker_image/ansible/deploy_docker_image.yml',
+                    extraVars: [
+                        build_number:'${BUILD_NUMBER}'
+                        ]
+//                    sudo: true
+                    )
+
+//                become(true)
+//                becomeUser("user")
+            }
+        }
+        stage ("Ansible_ec2-user") {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ec2-user',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/deploy_docker_image/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/deploy_docker_image/ansible/deploy_docker_image.yml',
+                    extraVars: [
+                        build_number:'${BUILD_NUMBER}'
+                        ],
+//                    extras: '-vvvv'
+//                    sudo: true
+                    )
+
+//                become(true)
+//                becomeUser("user")
+            }
+        }
+    }
+}
