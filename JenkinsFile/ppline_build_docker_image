@@ -25,7 +25,7 @@ pipeline {
             steps {
                //script {
                    //def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
-                   sh "echo ${buildNumber}"
+                   sh "echo gdewlgfe_${buildNumber}"
                //}
             }
         }
@@ -38,7 +38,7 @@ pipeline {
                     inventory: '/var/lib/jenkins/workspace/build_docker_image/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/build_docker_image/ansible/build_docker_image.yml',
                     extraVars: [
-                        build_number:'${buildNumber}'
+                        build_number:"${buildNumber}"
                         ]
 //                    sudo: true
                     )
