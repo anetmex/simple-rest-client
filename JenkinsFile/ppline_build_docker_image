@@ -1,7 +1,7 @@
 #!groovy
 // Check ub1 properties
 properties([disableConcurrentBuilds()])
-
+def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
 pipeline {
     agent {
         label 'master'
@@ -24,7 +24,7 @@ pipeline {
         stage("build parameters") {
             steps {
                script {
-                   def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
+                   //def buildNumber = Jenkins.instance.getItem('build_app').lastSuccessfulBuild.number
                    echo '${buildNumber}'
                }
             }
