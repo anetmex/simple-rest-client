@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+
+        stage("CHECKOUT_ANSIBLE") {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
+            }
+        }
+
+        stage ('Deploy latest version') {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provisioning_servers.yml',
+//                    extraVars: [
+//                        build_number:'${version_VERSION}'
+//                        ]
+//                    sudo: true
+                )
+            }
+        }
+    }
+}
