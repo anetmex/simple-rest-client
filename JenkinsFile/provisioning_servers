@@ -15,6 +15,7 @@ pipeline {
         parallel {
         stage ('Provision on ubuntu') {
             steps {
+            sh "echo gjkfj"
        //         ansiblePlaybook(
        //             credentialsId: 'ubuntu_key',
        //             disableHostKeyChecking: true,
