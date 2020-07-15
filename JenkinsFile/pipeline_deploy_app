@@ -11,8 +11,9 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
-
-        stage ('Deploy latest version') {
+        stage ('Deploy latest version of app on all hosts') {
+        parallel {
+        stage ('Deploy latest version on ubuntu') {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
@@ -26,6 +27,23 @@ pipeline {
 //                    sudo: true
                 )
             }
+        }
+        stage ('Deploy latest version on rhel') {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ec2-user',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/deploy_app.yml',
+                    extraVars: [
+                        build_number:'${version_VERSION}'
+                        ]
+//                    sudo: true
+                )
+            }
+        }
+        }
         }
     }
 }
