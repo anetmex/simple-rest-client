@@ -12,10 +12,25 @@ pipeline {
             }
         }
 
-        stage ('Deploy latest version') {
+        stage ('Deploy latest version on ubuntu') {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
+//                    extraVars: [
+//                        build_number:'${version_VERSION}'
+//                        ]
+//                    sudo: true
+                )
+            }
+        }
+        stage ('Deploy latest version on rhel') {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'ec2-user',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
