@@ -11,7 +11,7 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
-
+        parallel {
         stage ('Deploy latest version on ubuntu') {
             steps {
                 ansiblePlaybook(
@@ -41,6 +41,7 @@ pipeline {
 //                    sudo: true
                 )
             }
+        }
         }
     }
 }
