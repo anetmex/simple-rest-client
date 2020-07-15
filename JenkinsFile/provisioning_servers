@@ -11,8 +11,9 @@ pipeline {
                 userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
             }
         }
+        stage ('Provision on all hosts') {
         parallel {
-        stage ('Deploy latest version on ubuntu') {
+        stage ('Provision on ubuntu') {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ubuntu_key',
@@ -27,7 +28,7 @@ pipeline {
                 )
             }
         }
-        stage ('Deploy latest version on rhel') {
+        stage ('Provision on rhel') {
             steps {
                 ansiblePlaybook(
                     credentialsId: 'ec2-user',
@@ -41,6 +42,7 @@ pipeline {
 //                    sudo: true
                 )
             }
+        }
         }
         }
     }
