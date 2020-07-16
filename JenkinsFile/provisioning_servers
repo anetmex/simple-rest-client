@@ -15,18 +15,18 @@ pipeline {
         parallel {
         stage ('Provision on ubuntu') {
             steps {
-            sh "echo gjkfj"
-       //         ansiblePlaybook(
-       //             credentialsId: 'ubuntu_key',
-       //             disableHostKeyChecking: true,
-       //             installation: 'Ansible',
-       //             inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
-      //              playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
+            //sh "echo gjkfj"
+                ansiblePlaybook(
+                    credentialsId: 'ubuntu_key',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
+                    playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
 //                    extraVars: [
 //                        build_number:'${version_VERSION}'
 //                        ]
 //                    sudo: true
-    //            )
+                )
             }
         }
         stage ('Provision on rhel') {
