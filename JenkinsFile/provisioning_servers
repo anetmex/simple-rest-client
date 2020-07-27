@@ -22,7 +22,8 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
                     playbook: '${WORKSPACE}/ansible/ansible/provision.yml',
-                    hostKeyChecking: 'false'
+                    hostKeyChecking: 'false',
+                    limit: 'ubuntu'
 //                    extraVars: [
 //                        build_number:'${version_VERSION}'
 //                        ]
@@ -38,7 +39,8 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
-                    hostKeyChecking: 'false'
+                    hostKeyChecking: 'false',
+                    limit: 'redhat'
 //                    extraVars: [
 //                        build_number:'${version_VERSION}'
 //                        ]
