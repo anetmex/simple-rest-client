@@ -21,7 +21,8 @@ pipeline {
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
+                    playbook: '${WORKSPACE}/ansible/ansible/provision.yml',
+                    hostKeyChecking: 'false'
 //                    extraVars: [
 //                        build_number:'${version_VERSION}'
 //                        ]
@@ -35,8 +36,9 @@ pipeline {
                     credentialsId: 'ec2-user',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
+                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
                     playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
+                    hostKeyChecking: 'false'
 //                    extraVars: [
 //                        build_number:'${version_VERSION}'
 //                        ]
