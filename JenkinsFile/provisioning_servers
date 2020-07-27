@@ -20,7 +20,7 @@ pipeline {
                     credentialsId: 'ubuntu_key',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/inventory/staging.ini',
+                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
                     playbook: '${WORKSPACE}/ansible/ansible/provision.yml',
                     hostKeyChecking: 'false',
                     limit: 'ubuntu'
@@ -38,7 +38,7 @@ pipeline {
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/provisioning_servers/ansible/ansible/provision.yml',
+                    playbook: '${WORKSPACE}/ansible/ansible/provision.yml',
                     hostKeyChecking: 'false',
                     limit: 'redhat'
 //                    extraVars: [
