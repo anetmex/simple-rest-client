@@ -16,7 +16,7 @@ pipeline {
         stage ('Deploy latest version on ubuntu') {
             steps {
                 ansiblePlaybook(
-                    credentialsId: 'ubuntu_key',
+                    credentialsId: 'deploy',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
