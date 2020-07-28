@@ -39,24 +39,5 @@ pipeline {
 //                becomeUser("user")
             }
         }
-        stage ("Ansible_ec2-user") {
-            steps {
-                ansiblePlaybook(
-                    credentialsId: 'ec2-user',
-                    disableHostKeyChecking: true,
-                    installation: 'Ansible',
-                    inventory: '${WORKSPACE}/ansible/inventory/staging.ini',
-                    playbook: '${WORKSPACE}/ansible/build_docker_image.yml',
-                    extraVars: [
-                        build_number:'${BUILD_NUMBER}'
-                        ],
-//                    extras: '-vvvv'
-//                    sudo: true
-                    )
-
-//                become(true)
-//                becomeUser("user")
-            }
-        }
     }
 }
