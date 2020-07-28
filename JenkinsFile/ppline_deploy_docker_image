@@ -24,7 +24,7 @@ pipeline {
         stage ("Ansible_ubuntu") {
             steps {
                 ansiblePlaybook(
-                    credentialsId: 'ubuntu_key',
+                    credentialsId: 'deploy',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '${WORKSPACE}/ansible/inventory/staging.ini',
@@ -42,7 +42,7 @@ pipeline {
         stage ("Ansible_ec2-user") {
             steps {
                 ansiblePlaybook(
-                    credentialsId: 'ec2-user',
+                    credentialsId: 'deploy',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
                     inventory: '${WORKSPACE}/ansible/inventory/staging.ini',

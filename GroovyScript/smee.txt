@@ -1,0 +1,2 @@
+#run on jenkins host to enable webhook
+smee -u https://smee.io/I1ATWqg8GDB1pGUG -p 8080 -P /github-webhook/
