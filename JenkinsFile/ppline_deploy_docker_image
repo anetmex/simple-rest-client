@@ -30,7 +30,8 @@ pipeline {
                     inventory: '${WORKSPACE}/ansible/inventory/staging.ini',
                     playbook: '${WORKSPACE}/ansible/deploy_docker_image.yml',
                     extraVars: [
-                        build_number:'${BUILD_NUMBER}'
+                        build_number:'${BUILD_NUMBER}',
+                        app_port:'${app_port}'
                         ]
 //                    sudo: true
                     )
