@@ -21,7 +21,7 @@ pipeline {
                     installation: 'Ansible',
                     //inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
                     inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/deploy_app.yml',
+                    playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
                     extraVars: [
                         build_number:'${version_VERSION}'
                         ]
@@ -35,8 +35,8 @@ pipeline {
                     credentialsId: 'deploy',
                     disableHostKeyChecking: true,
                     installation: 'Ansible',
-                    inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
-                    playbook: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/deploy_app.yml',
+                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
+                    playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
                     extraVars: [
                         build_number:'${version_VERSION}'
                         ]
