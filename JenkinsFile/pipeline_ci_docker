@@ -94,8 +94,8 @@ pipeline {
                     playbook: '${WORKSPACE}/ansible/deploy_docker_image.yml',
                     extraVars: [
                         build_number:'${BUILD_NUMBER}',
-                        limit: 'dev',
-                        app_port:'${app_port}'
+                        limit: 'dev'
+//                        app_port:'${app_port}'
                         ]
 //                    sudo: true
                     )
