@@ -88,7 +88,7 @@ pipeline {
                     playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
                     limit: 'dev',
                     extraVars: [
-                        build_number:'${version_VERSION}'
+                        build_number:'${BUILD_NUMBER}'
                         ]
 //                    sudo: true
                 )
