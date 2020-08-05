@@ -92,9 +92,10 @@ pipeline {
                     installation: 'Ansible',
                     inventory: '${WORKSPACE}/ansible/inventory/staging.ini',
                     playbook: '${WORKSPACE}/ansible/deploy_docker_image.yml',
+                    limit: 'dev',
                     extraVars: [
-                        build_number:'${BUILD_NUMBER}',
-                        limit: 'dev'
+                        build_number:'${BUILD_NUMBER}'
+
 //                        app_port:'${app_port}'
                         ]
 //                    sudo: true
