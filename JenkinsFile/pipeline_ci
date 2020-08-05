@@ -1,0 +1,97 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Clone SCM') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/simple-rest-client']]])
+            }
+        }
+//        stage("CHECKOUT_ANSIBLE") {
+//            steps {
+//                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+//                doGenerateSubmoduleConfigurations: false,
+//                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']],
+//                submoduleCfg: [],
+//                userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
+//            }
+//        }
+        stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "artifactory-server",
+                    url: "http://10.0.1.243:8082/artifactory",
+                    credentialsId: "artifactory_admin"
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "artifactory-server",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "artifactory-server",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+            }
+        }
+
+        stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: 'maven-server', // Tool name from Jenkins configuration
+                    pom: 'pom.xml',
+                    goals: 'clean install -Dv=${BUILD_NUMBER}',
+                    buildNumber: '${BUILD_NUMBER}',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+
+        stage ('Test') {
+            steps {}
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "artifactory-server"
+                )
+            }
+        }
+         stage("Checkout ansible configuration") {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ansible']],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: 'my_user', url: 'https://github.com/anetmex/ansible']]])
+            }
+        }
+        stage ('Deploy latest version of app on all hosts') {
+        parallel {
+        stage ('Deploy latest version') {
+            steps {
+                ansiblePlaybook(
+                    credentialsId: 'deploy',
+                    disableHostKeyChecking: true,
+                    installation: 'Ansible',
+                    //inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
+                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
+                    playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
+                    limit: 'dev'
+                    extraVars: [
+                        build_number:'${version_VERSION}'
+                        ]
+//                    sudo: true
+                )
+            }
+        }
+    }
+}
