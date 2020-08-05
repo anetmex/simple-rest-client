@@ -30,21 +30,21 @@ pipeline {
                 )
             }
         }
-        stage ('Deploy latest version on rhel') {
-            steps {
-                ansiblePlaybook(
-                    credentialsId: 'deploy',
-                    disableHostKeyChecking: true,
-                    installation: 'Ansible',
-                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
-                    playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
-                    extraVars: [
-                        build_number:'${version_VERSION}'
-                        ]
+//        stage ('Deploy latest version on rhel') {
+//            steps {
+//                ansiblePlaybook(
+//                    credentialsId: 'deploy',
+//                    disableHostKeyChecking: true,
+//                    installation: 'Ansible',
+//                    inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
+//                    playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
+//                    extraVars: [
+//                        build_number:'${version_VERSION}'
+//                        ]
 //                    sudo: true
-                )
-            }
-        }
+//                )
+//            }
+//        }
         }
         }
     }
