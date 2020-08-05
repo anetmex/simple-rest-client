@@ -85,7 +85,7 @@ pipeline {
                     //inventory: '/var/lib/jenkins/workspace/deploy_app/ansible/ansible/inventory/staging.ini',
                     inventory: '${WORKSPACE}/ansible/ansible/inventory/staging.ini',
                     playbook: '${WORKSPACE}/ansible/ansible/deploy_app.yml',
-                    limit: 'dev'
+                    limit: 'dev',
                     extraVars: [
                         build_number:'${version_VERSION}'
                         ]
