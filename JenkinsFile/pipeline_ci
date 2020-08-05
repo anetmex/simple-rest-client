@@ -55,7 +55,8 @@ pipeline {
         }
 
         stage ('Test') {
-            steps {}
+            steps {
+            sh "echo test"}
         }
 
         stage ('Publish build info') {
